@@ -1,8 +1,8 @@
+import Tables from "../../features/Tables";
+
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+        <Tables />
     )
 }
 
