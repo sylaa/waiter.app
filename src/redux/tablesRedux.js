@@ -1,7 +1,7 @@
 //selectors
 export const getTableId = ({ tables }, tableId) =>
   tables.find((table) => table.id === tableId);
-export const getAllTables = ({ tables }) => tables;
+export const getAllTables = state => state.tables;
 
 // actions
 const createActionName = (actionName) => `app/tables/${actionName}`;
@@ -35,9 +35,8 @@ export const singleTableUpdate = (tableData) => {
       }),
     };
 
-    fetch('http://localhost:3131/tables', options).then(() =>
-      dispatch(editTable(tableData))
-    );
+    fetch(`http://localhost:3131/tables/${tableData.id}`, options)
+    .then(() =>dispatch(editTable(tableData)))
   };
 };
 

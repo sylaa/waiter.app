@@ -21,6 +21,7 @@
     "redux-thunk": "^2.4.1",
     "sass": "1.43.4",
     "server": "^1.0.37",
+    "shortid": "^2.2.16",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
