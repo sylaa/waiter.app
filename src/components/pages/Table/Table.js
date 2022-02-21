@@ -55,6 +55,7 @@ const Table = () => {
     }
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -65,6 +66,18 @@ const Table = () => {
     // setMaxPeopleAmount('');
     // setBill('');
     navigate('/');
+  };
+
+  const peopleAmountHandler = (e) => {
+    if(e.target.value > maxPeopleAmount){
+      setPeopleAmount(maxPeopleAmount);
+      return;
+    }
+    setPeopleAmount(e.target.value);
+  };
+
+  const maxPeopleAmountHandler = (e) => {
+    setMaxPeopleAmount(e.target.value)
   };
 
   return (
@@ -102,9 +115,11 @@ const Table = () => {
                 </div>
                 <div className={styles.numberInput}>
                   <Form.Control
-                    type='text'
+                    type='number'
+                    min='0'
+                    max='10'
                     value={peopleAmount}
-                    onChange={(e) => setPeopleAmount(e.target.value)}
+                    onChange={peopleAmountHandler}
                   ></Form.Control>
                 </div>
                 <div>
@@ -112,9 +127,11 @@ const Table = () => {
                 </div>
                 <div className={styles.numberInput}>
                   <Form.Control
-                    type='text'
+                    type='number'
+                    min='0'
+                    max='10'
                     value={maxPeopleAmount}
-                    onChange={(e) => setMaxPeopleAmount(e.target.value)}
+                    onChange={maxPeopleAmountHandler}
                   ></Form.Control>
                 </div>
               </div>
