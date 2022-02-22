@@ -6,8 +6,7 @@ import {
   isLoading,
   fetchTables,
 } from '../../../redux/tablesRedux';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { useParams, Navigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import shortid from 'shortid';
 import styles from './Table.module.scss';
@@ -16,7 +15,6 @@ import NotFound from '../NotFound/NotFound';
 
 const Table = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const table = useSelector((state) => getTableId(state, parseInt(id)));
 
@@ -55,17 +53,14 @@ const Table = () => {
     }
   };
 
+  const [backToHomePage, setBackToHomePage] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      singleTableUpdate({ status, peopleAmount, maxPeopleAmount, bill })
+      singleTableUpdate({ status, peopleAmount, maxPeopleAmount, bill, id })
     );
-    // setStatus('');
-    // setPeopleAmount('');
-    // setMaxPeopleAmount('');
-    // setBill('');
-    navigate('/');
+    setBackToHomePage(true)
   };
 
   const peopleAmountHandler = (e) => {
@@ -82,9 +77,10 @@ const Table = () => {
 
   return (
     <>
+      {backToHomePage && <Navigate to="/"/>}
+
       {isTableLoading && <SpinnerComponent />}
       {!isTableLoading && !table && <NotFound />}
-
       {!isTableLoading && table && (
         <>
           <h1>Table {id}</h1>
@@ -160,7 +156,9 @@ const Table = () => {
             </Button>
           </Form>
         </>
+        
       )}
+
     </>
   );
 };

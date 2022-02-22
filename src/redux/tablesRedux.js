@@ -1,3 +1,6 @@
+import { API_URL } from "../config";
+
+
 //selectors
 export const getTableId = ({ tables }, tableId) =>
   tables.data.find((table) => table.id === tableId);
@@ -21,7 +24,7 @@ export const fetchError = (payload) => ({ type: FETCH_ERROR, payload });
 export const fetchTables = () => {
   return (dispatch) => {
     dispatch(fetchStart());
-    fetch('http://localhost:3131/api/tables')
+    fetch(`${API_URL}/tables`)
       .then((res) => res.json())
       .then((tables) => dispatch(updateTables(tables)))
       .catch((error) =>
@@ -45,7 +48,7 @@ export const singleTableUpdate = (tableData) => {
       }),
     };
     dispatch(fetchStart())
-    fetch(`http://localhost:3131/tables/${tableData.id}`, options).then(() =>
+    fetch(`${API_URL}/table/${tableData.id}`, options).then(() =>
       dispatch(editTable(tableData))
     )
     .catch((error) =>
