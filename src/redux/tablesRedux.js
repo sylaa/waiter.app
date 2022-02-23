@@ -48,7 +48,7 @@ export const singleTableUpdate = (tableData) => {
       }),
     };
     dispatch(fetchStart())
-    fetch(`${API_URL}/table/${tableData.id}`, options).then(() =>
+    fetch(`${API_URL}/tables/${tableData.id}`, options).then(() =>
       dispatch(editTable(tableData))
     )
     .catch((error) =>
